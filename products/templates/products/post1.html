@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Form</title>
+    </head>
+    <body>
+        <form action="{% url 'products:add' %}" method="POST">
+            {% csrf_token %}
+
+            {% if not product %}
+                <label for="price">price:</label><br>
+                <input type="text" name="price" id="price"><br>
+                <label for="amount">amount:</label><br>
+                <input type="text" name="amount" id="amount"><br>
+            {% endif %}
+
+            {% for product in Product.objects.all %}
+                <label for="price">price:</label><br>
+                <input type="text" name="price" id="price" value="{{ product.price }}"><br>
+                <label for="amount">amount:</label><br>
+                <input type="text" name="amount" id="amount" value="{{ product.amount }}"><br>
+            {% endfor %}
+            <br>
+            <input type="submit" value="Submit">
+        </form>
+    </body>
+</html>

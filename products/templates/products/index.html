@@ -2,15 +2,31 @@
 <html>
     <head>
         <title>index</title>
+        <style>
+            table, th, td {
+              border: 1px solid black;
+            }
+        </style>
     </head>
     <body>
-        <ul>
-        {% for product in profuct_list %}
-            <li><a href="{% url 'products:add' %}">{{ product.price }} & {{ product.amount }}</a></li>
-        </ul>
-        {% empty %}
-            <p>No products are available.</p>
-        {% endfor %}
+        <table>
+            <tr>
+                <th>price</th>
+                <th>amount</th>
+                <th>update</th>
+            </tr>
+            {% for product in product_list %}
+                <tr>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.amount }}</td>
+                    <td><a href="{% url 'products:update' product.id %}">update</a></td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="3">No products are available.</td>
+                </tr>
+            {% endfor %}
+        </table>
         <a href="{% url 'products:add' %}">Create Product</a>
     </body>
 </html>
